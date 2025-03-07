@@ -1,0 +1,214 @@
+---
+title: "Badanie czystości ekologicznej powiatów w województwie Podkarpackim"
+output: html_document
+---
+<style>
+body {
+text-align: justify}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Wstęp
+   Województwo podkarpackie to region położony w południowo-wschodniej Polsce. Pod względem administracyjnym województwo dzieli się na 25 powiatów, w tym 21 ziemskich i 4 grodzkie (miasta: Rzeszów, Przemyśl, Krosno i Tarnobrzeg). Stolicą województwa jest Rzeszów - centralny ośrodek akademicki, gospodarczy i kulturalny. Podkarpacie zajmuje obszar o powierzchni 17 845,76 km2, przez co zajmuje 11. miejsce w kraju pod względem powierzchni oraz 9. miejsce pod względem liczby ludności, ponieważ podkarpacie zamieszkuje około 2 129,9 tys. mieszkańców. Jest to obszar najmniej zurbanizowany w kraju oraz jest naczystszym ekologicznie regionem.
+  Region czysty ekologicznie to region, który spełnia szereg przepisów prawnych. Przykładowym wyznacznikiem jest stan zanieczyszczenia powietrza czy wód podziemnych. Takowe regiony posiadają na swoim terenie powierzchnie prawnie chronione takie, jak parki narodowe, parki krajobrazowe, obszary Natura 2000, rezerwaty czy posiadają liczne pomniki przyordy. Regiony czyste ekologicznie odznaczają się żyzną glebą, a co za tym idzie, sprzyjają rolnictwu ekologicznemu.
+  Województwo Podkarpackie jest charakterystyczne ze względu na swoje zielone tereny. Prawie 45 % powierzchni województwa zajmują obszary prawnie chronione. Są wśród nich m.in. 2 parki narodowe Magurski i Bieszczadzki, 94 rezerwaty przyrody oraz wiele innych. Znajduje się tutaj również 8 obszarów specjalnej ochrony ptaków oraz 17 obszarów ochrony siedlisk. Ogólna lesistość województwa wynosi 37,8 % i jest wyższa od średniej krajowej o 8,5 %. Lasy w regionie zajmują powierzchnię ponad 680 tys. ha. Ze względu na wszystkie wymienione statystyki uznano, że właśnie to województwo jest dobrym obszarem do badania pod względem czystości ekologicznej. 
+  W niniejszym opracowaniu badane są tereny na poziomie NUTS 2 - czyli powiatów w województwie. Celem badania jest próba identyfikacji i oceny czystości ekologicznej powiatów. Do badania zostaną wykorzystane metody porządkowania liniowego, dzięki którym możliwe jest porównanie wielowymiarowych danych i uporządkowanie ich od najlepszego do najgorszego według wcześniej wyznaczonego kryterium. 
+
+## 2.Opis metody porządkowania liniowego
+   Metody porządkowania liniowego dzielą się na wzorcowe oraz bezwzorcowe. Metody bezwzorcowe bazują na funkcji, której argumentami są cechy opisujące obiekty, natomiast metody wzorcowe polegają na wyznaczeniu odległości obiektu od wcześniej ustalonego "idealnego" wzorca. W tym opracowaniu użyto jednej z metod wzorcowych - metody TOPSIS. TOPSIS to skrót od *Technique for Order of Preference by Similarity to Ideal Solution*. Algorytm ten w roku 1981 zaprezentowali Hwang i Yoon i jest bardzo zbliżony do metody Hellwiga, która powstała prawie 20 lat wcześniej. TOPSIS polega na wyznaczeniu macierzy ze znormalizowanym wartościami, a następnie na wyznaczeniu wzorca oraz antywzorca:
+   
+   <center><span style="font-size:larger;">**$$a^{+} = (a_{1}^{+},...,a_{n}^{+})$$** oraz **$$a^{-} = (a_{1}^{-},...,a_{n}^{-})$$ **</span></center>
+   
+  
+   Kolejnym krokiem jest wyliczenie odległości obiektów d~i~ od a^+^ i a^-^:
+   
+   <center><span style="font-size:larger;">**$$d_{i}^{+} = \sqrt {\sum_{j=1}^{n} (v_{ij}-a_{j}^{+})^{2}}$$** oraz **$$d_{i}^{-} = \sqrt {\sum_{j=1}^{n} (v_{ij}-a_{j}^{-})^{2}}$$**</span></center>
+   
+  
+   Ostatnim etapem jest wyznaczenie współczynnika rankingowego określającego podobieństwo obiektów do rozwiązania idealnego:
+   
+<center><span style="font-size:larger;">**$$R_{i} = \frac{d_{i}^{-}}{d_{i}^{-} + d_{i}^{+}}$$**</span></center>
+   
+
+Jednak zanim przejdzie się do metody TOPSIS należy, które zmienne są stymulantami (pożądane są wysokie wyniki wśród zmiennych) czy destymulantami (pożądane są niskie wyniki wśród zmiennych), w celu przeprowadzenia odpowiedniej normalizacji. W tym badaniu wybrano metodę przekształcenia ilorazowego, której wzór jest następujący:
+
+  <center><span style="font-size:larger;">**$$z_{ij} = \frac{x_{ij}}{\sqrt{\sum x_{ij}^{2}}}$$**</span></center>
+  
+  gdzie:
+  
+  z~ij~ - znormalizowana wartość j-tej zmiennej dla i-tego obiektu
+  
+  x~ij~ -  wartość j-tej zmiennej dla i-tego obiektu
+   
+## 3. Opis danych
+   Czystość ekologiczna jest skomplikowanym pojęciem, które nie jest bezpośrednio mierzalne. Na czystość ekologiczną regionu składa się szereg czynników dotyczący czystości powietrza, wód podziemnych i powierzchniowych, żyzność gleb, tereny zielone, ochrona prawna obszraów przyrodniczych oraz licznych gatunków zwierząt. Biorąc pod uwagę te czynniki wyróżniono 11 zmiennych, które mają wpływ na poziom czystości ekologicznej regionu. Dane dotyczą 2018 roku i pochodzą z portalu Głównego Urzędu Statystycznego za pośrednictwem Banku Danych Lokalnych. W badaniu pogrupowano dane według trzech najważniejszych kategorii:
+  
+  - wpływ ludzi na środowisko;
+  
+  - tereny zielone i pomniki przyrody;
+  
+  - tereny prawnie chronione.
+  
+Uznano to za kategorie mające istotny wpływ na czystość ekologiczną terenu. Do poszczególnych kategorii przyporządkowano następujące zmienne:
+
+* wpływ ludzi na środowisko
+  + **X1** gęstość zaludnienia (os./km2)
+  + **X2** odsetek oczyszczanych ścieków przemysłowych i komunalnych jako % zanieczyszczeń wymagajcych oczyszczenia
+  + **X3** zanieczyszczenia powietrza zatrzymane w urządzeniach do redukcji zanieczyszczeń w zakładach szczególnie uciążliwych jako % zanieczyszczeń wytworzonych ogółem
+  + **X4** emisja zanieczyszczeń pyłowych w stosunku do Polski, jako % wszystkich emitowanych zanieczyszczeń w Polsce
+  + **X5** powierzchnia dzikich wysypisk (m2/ha)
+* tereny zielone i pomniki przyrody
+  + **X6** liczba pomników przyrody
+  + **X7** powierzchnia terenów zielonych (m2/ha)
+  + **X8**Powierzchnia użytków ekologicznych (m2/ha)
+* tereny prawnie chronione
+  + **X9** powierzchnia Parków Narodowych (m2/ha)
+  + **X10** Powierzchnia rezerwatów przyrody (m2/ha)
+  + **X11** Powierzchnia Parków krajobrazowych ogólem (m2/ ha)
+
+W tym zbiorze danych stymulantami są zmienne X2, X3, X6, X7, X8, X9, X10 oraz X11, co oznacza, że w destymulantami są jedynie zmienne X1, X4 oraz X5. Wartości tych zmiennych dla poszczególnych powiatów są następujące:
+```{r echo=FALSE}
+Powiaty <- read.table("powiaty.csv", header=TRUE, sep=";", row.names =1)
+library(knitr)
+kable(Powiaty[1:25,])
+```
+
+Dla każdej zmiennej X wyznaczono współczynnik zmienności, aby wykluczyć *quasi* stałe zmienne. Uzyto następującego kodu:
+```{r echo=TRUE}
+wsp_zmiennosci<-function(x){
+  sd(x)/mean(x)
+}
+
+Powiaty_wz <- matrix(NA, 11, 1)
+rownames(Powiaty_wz) <- colnames(Powiaty)
+for(i in 1:11){
+  Powiaty_wz[i] <- format(round(wsp_zmiennosci(Powiaty[,i])*100,2), nsmall=2)
+}
+```
+
+Wynikiem tego kodu są współczynniki zmienności podane w punktach procentowych dla każdej zmiennej z osobna:
+```{r echo=FALSE}
+library(graphics)
+kable(Powiaty_wz[1:11,],col.names = "współczynnik zmienności")
+
+plot(Powiaty_wz,main="Współczynnik zmienności",xlab="zmienna",ylab="współczynnik zmienności(%)",type="p",col="dark green")
+```
+
+Patrząc na powyższą tabelę widać, że jedynie dla zmiennej X2 współczynnik zmienności jest mniejszy od 10%, oznacza to, że zmienna jest jest bliska stałej, dlatego w celu dalszych badań należy ją usunąć ze zbioru danych. Zatem finalny zbiór danych jest następujący:
+
+```{r echo=FALSE}
+Powiaty<-Powiaty[,-2]
+library(knitr)
+kable(Powiaty[1:25,])
+```
+
+## 4. Badania empiryczne
+  Po wybraniu odpowiedniego zestawu danych należy zacząć od zamiany destymulant na stymulant. Wyżej zaznaczono, że destymulantami są jedynie X1, X4 oraz X5. Poniższy kod dokonuje łatwego przekształcenia tych zmiennych:
+```{r echo=TRUE}
+Powiaty[,1]<- -Powiaty[,1]
+Powiaty[,3]<- -Powiaty[,3]
+Powiaty[,4]<- -Powiaty[,4]
+
+```
+  
+  Następnie należy przejść do normalizacji zmiennych, by wyniki metody porządkowania liniowego nie były zaburzone. Jak wyżej napisano, aby to osiągnąć, użyto metody przekształcenia ilorazowego. Kod, którego użyto do tej operacji, jest następujący:
+```{r echo=TRUE}
+przeksztalcenie_ilorazowe<- function(wektor){
+  wynik=wektor/sqrt(sum(wektor^2))}
+  
+powiaty_normalizowane<-matrix(NA,25,10)
+for(i in 1:10)
+{
+  powiaty_normalizowane[,i]=przeksztalcenie_ilorazowe(Powiaty[,i])
+}
+```
+
+Po znormalizowaniu zmiennych należy wyznaczyć wzorce. Ideałem będzie obiekt o zmiennych z jak najwyższymi wartościami, ponieważ już wcześniej przekształcono destymulanty na stymulanty. Natomiast antyideałem będzie obiekt o zmiennych z jak najniższymi wartościami.
+```{r echo=TRUE}
+ideal<-c(max(powiaty_normalizowane[,1]),
+         max(powiaty_normalizowane[,2]),
+         max(powiaty_normalizowane[,3]),
+         max(powiaty_normalizowane[,4]),
+         max(powiaty_normalizowane[,5]),
+         max(powiaty_normalizowane[,6]),
+         max(powiaty_normalizowane[,7]),
+         max(powiaty_normalizowane[,8]),
+         max(powiaty_normalizowane[,9]),
+         max(powiaty_normalizowane[,10])
+         )
+antyideal<-c(min(powiaty_normalizowane[,1]),
+             min(powiaty_normalizowane[,2]),
+             min(powiaty_normalizowane[,3]),
+             min(powiaty_normalizowane[,4]),
+             min(powiaty_normalizowane[,5]),
+             min(powiaty_normalizowane[,6]),
+             min(powiaty_normalizowane[,7]),
+             min(powiaty_normalizowane[,8]),
+             min(powiaty_normalizowane[,9]),
+             min(powiaty_normalizowane[,10])
+            )
+```
+
+Wynikiem ustalenia wzorców obiekty o następujących wartościach poszczególnych zmiennych:
+```{r echo=FALSE}
+wzorce<-cbind(ideal,antyideal)
+row.names(wzorce)<-colnames(Powiaty)
+kable(wzorce)
+```
+
+Po zdefiniowaniu wzorców można przejść do właściwej części badania - porządkowania liniowego. Tworzymy macierz 25x3 gdzie w pierwszej kolumnie znajdują się w odległości obiektu x~ij~ od wartości idealnej, w drugiej odległości obiektu x~ij~ od wartości antyidealnej i następnie, ze wzoru na metodę TOPSIS, w trzeciej kolumnie znajduje się wartości nadanego wspólczynnika rangowego.
+``` {r echo=TRUE}
+topsis<-matrix(NA,25,3)
+
+for(i in 1:25){
+  Obiekt=powiaty_normalizowane[i,]
+  Obiektid<-rbind(Obiekt, ideal)
+  Obiektanty<-rbind(Obiekt,antyideal)
+  topsis[i,1]<-dist(Obiektid)
+  topsis[i,2]<-dist(Obiektanty)
+  topsis[i,3]<-topsis[i,2]/(topsis[i,1]+topsis[i,2])
+}
+```
+
+## 5. Podsumowanie
+  Ostatnim etapem badania jest posortownaie tabeli, by poprawnie odczytać rankig:
+``` {r echo=FALSE}
+tabela<-matrix(NA,25,2)
+for(i in 1:25)
+{
+  tabela[i,1]<-topsis[i,3]
+  tabela[i,2]<-row.names(Powiaty[i,])
+}
+colnames(tabela)<-c("Współczynnik rankingowy","Powiat")
+
+
+tabela_posortowana<-tabela[order(tabela[,1],decreasing = TRUE),]
+kable(tabela_posortowana)
+```
+
+  Z rankingu wynika, że najczystszym ekologicznie powiatem w województwie Podkarpackim jest powiat Bieszczadzki, natomiast najmniej czystym ekologicznie regionem okazało się być miasto Przemyśl. Wskaźnik rankingowy między tymi dwoma pozycjami różni się niemal dwukrotnie. Dzieje się tak, ponieważ na południu województwa Podkarpackiego znajduje się Bieszczadzki Park Narodowy, co ma ogromny wpływ na czystość ekologiczną tych terenów - mniejsza gęstość zaludnienia, zakaz zabudowywania kolejnych terenów zielonych, brak terenów przemysłowych, itd. Niską czystością ekologiczną regionu odznacza się tylko miasto Przemyśl, ale również miasta Krosno czy Rzeszów. Oznacza, że tereny sielnie zurbaniozowane nie sprzyjają zachowaniu ekologiczności. Mimo małego odsetka zanieczyszczeń w stosunku do całego kraju, tereny wysoko zurbaniozowane nie są w stanie osiągnąć tak dobrych wyników, jak tereny na których działalności człowieka są niemal znikome. Poniższa mapa województwa zobrazowuje ekologiczną czystość powiatów według czterech rang:
+  
+  * 4 (wskaźnik powyżej 59%)
+  
+  * 3 (wsakźnik pomiędzy 46% a 59%)
+  
+  * 2 (wskaźnik pomiędzy 44% a 46%)
+  
+  * 1 (wskaźnik poniżej 44%)
+  
+  
+  ![](C:/Users/Justyna/Desktop/Zadania/IiE 3.1/SAD/projekt I/wykres.PNG)
+  
+<div style="text-align: right"> Justyna Zbiegień, IiE rok 3 </div>
+                             
+<span style="color:white">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+
+<span style="color:white">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+
+<span style="color:white">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+                                                  
+
+
