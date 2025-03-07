@@ -1,0 +1,62 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="E40E5E1B-912C-C381-D21A-A3D28E1D52E4" name="Typ Zajęć Grupowych">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:27:35 UTC</createdTime>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Typ Zajęć Grupowych" id="539F5141-B923-A813-A4F4-40BFC4EC33F1">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:27:49 UTC</createdTime>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Poziom Zaawansowania Zajęć" id="3829A7E4-DE94-D51B-D405-90A1ADFB0414">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:32:42 UTC</createdTime>
+<generatorID>D19ABC17-8EF1-A0E3-34DF-A752FDEF5D78</generatorID>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<referedAttribute>E13DA3A4-0375-BA19-6912-C942792A3A7C</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="ACF16908-3FAE-AE99-86C4-AD3D3226E154" name="Typ Zajęć Grupowych PK">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:28:02 UTC</createdTime>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>539F5141-B923-A813-A4F4-40BFC4EC33F1</attributeRef>
+<attributeRef>3829A7E4-DE94-D51B-D405-90A1ADFB0414</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

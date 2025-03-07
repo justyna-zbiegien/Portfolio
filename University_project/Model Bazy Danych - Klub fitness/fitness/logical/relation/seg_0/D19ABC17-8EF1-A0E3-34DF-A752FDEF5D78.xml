@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_12" directorySegmentName="seg_0" id="D19ABC17-8EF1-A0E3-34DF-A752FDEF5D78">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:32:42 UTC</createdTime>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<sourcePk>DC8AA9FC-BADF-C412-EACB-17C21335AAAA</sourcePk>
+<identifying>true</identifying>
+<nameOnSource>określa</nameOnSource>
+<nameOnTarget>zawiera</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>FC8A88C0-B5DC-C770-1A27-F3250C07EECA</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>E40E5E1B-912C-C381-D21A-A3D28E1D52E4</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

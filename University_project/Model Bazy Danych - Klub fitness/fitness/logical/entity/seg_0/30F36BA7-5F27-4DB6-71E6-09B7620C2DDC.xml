@@ -1,0 +1,147 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="30F36BA7-5F27-4DB6-71E6-09B7620C2DDC" name="Zajęcia Grupowe">
+<createdBy>jz107961</createdBy>
+<createdTime>2021-11-04 18:42:22 UTC</createdTime>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Limit Osób na Zajęciach" id="EAD80F14-015F-7E9E-FE00-47B04AAB8CA6">
+<createdBy>jz107961</createdBy>
+<createdTime>2021-11-04 19:04:20 UTC</createdTime>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>2</dataTypePrecision>
+<ownDataTypeParameters>,2,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Poziom Zaawansowania Zajęć" id="AFE01CD0-E028-A573-B4FB-DFED8FE63EE1">
+<createdBy>jz107961</createdBy>
+<createdTime>2021-11-04 19:04:42 UTC</createdTime>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Data Zajęć" id="FB3F3F8A-4994-27CF-9F43-3157D7D02DF7">
+<createdBy>jz107961</createdBy>
+<createdTime>2021-11-04 19:10:28 UTC</createdTime>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Godzina Zajęć" id="992A238C-11B6-C5B7-8915-61733B71FFA2">
+<createdBy>jz107961</createdBy>
+<createdTime>2021-11-04 19:10:41 UTC</createdTime>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nazwa Studia" id="4AE97704-36F6-87E2-50E8-088F493C208B">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:15:00 UTC</createdTime>
+<generatorID>12C2C7FC-9A85-DF0C-D1FE-7E99F39F69D6</generatorID>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<referedAttribute>AACCC1BA-5FFA-F89B-D4D6-7BA42A187D5E</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Id Trenera" id="60873C68-F571-8E22-7268-9E9A67D1AF2B">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:19:29 UTC</createdTime>
+<generatorID>587E57EB-D6D2-AD84-892E-DCF3F86F8D39</generatorID>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<referedAttribute>3AB59D0D-7E3C-29EF-5EB2-25E3F8099449</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Typ Zajęć Grupowych" id="5600CDCF-0660-ECF6-0FBF-722A6E3C52F2">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:30:33 UTC</createdTime>
+<generatorID>3E111E4E-C107-EA84-8B1A-8AF1A5625063</generatorID>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<referedAttribute>539F5141-B923-A813-A4F4-40BFC4EC33F1</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Poziom Zaawansowania Zajęć1" id="20F20F1D-44C3-D2A5-E50A-7D03B15CBFE7">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:32:42 UTC</createdTime>
+<generatorID>3E111E4E-C107-EA84-8B1A-8AF1A5625063</generatorID>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<referedAttribute>3829A7E4-DE94-D51B-D405-90A1ADFB0414</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="6B56A10A-44A9-1983-06B1-D9906590CE23" name="Zajecia Grupowe PK">
+<createdBy>jz107961</createdBy>
+<createdTime>2021-11-04 19:10:38 UTC</createdTime>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>FB3F3F8A-4994-27CF-9F43-3157D7D02DF7</attributeRef>
+<attributeRef>992A238C-11B6-C5B7-8915-61733B71FFA2</attributeRef>
+<attributeRef>4AE97704-36F6-87E2-50E8-088F493C208B</attributeRef>
+<attributeRef>5600CDCF-0660-ECF6-0FBF-722A6E3C52F2</attributeRef>
+<attributeRef>20F20F1D-44C3-D2A5-E50A-7D03B15CBFE7</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

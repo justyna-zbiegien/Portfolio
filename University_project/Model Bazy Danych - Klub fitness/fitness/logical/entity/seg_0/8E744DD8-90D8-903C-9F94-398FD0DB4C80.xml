@@ -1,0 +1,94 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="8E744DD8-90D8-903C-9F94-398FD0DB4C80" name="Zakupienie Karnetu">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:37:13 UTC</createdTime>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="Login Użytkownika" id="2E5665C7-EC14-5B1F-5A28-352B2879D976">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:38:30 UTC</createdTime>
+<generatorID>B98E6D00-142C-BBBA-9615-246FB016DC85</generatorID>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<referedAttribute>B042E62F-D230-9652-A4A6-7BCBCDC659D8</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Data Rozpoczęcia Karnetu" id="02861100-1C85-BB5A-1EBC-19E52B3CA339">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:38:37 UTC</createdTime>
+<generatorID>5C097234-BC76-93A7-ED8F-EE986E71679E</generatorID>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<referedAttribute>62DE2301-DB08-CBE9-030E-C12FFB05120E</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Data Zakończenia Karnetu" id="7ACF151B-9A07-2DC0-E626-FC3A3EFD25C1">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:38:37 UTC</createdTime>
+<generatorID>5C097234-BC76-93A7-ED8F-EE986E71679E</generatorID>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<referedAttribute>12C10F24-AEA0-0F96-645C-F6FDF7D387D5</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Nazwa Typu Karnetu" id="C381AE3A-43CF-EA3B-2263-6B43D18982D7">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:38:37 UTC</createdTime>
+<generatorID>5C097234-BC76-93A7-ED8F-EE986E71679E</generatorID>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<referedAttribute>10D4E29E-4FCC-1D37-D79E-C1710D702AF9</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="270030AA-2A42-F96B-1E39-C7806EE8A815" name="Zakupienie Karnetu PK">
+<createdBy>Justyna</createdBy>
+<createdTime>2021-12-03 13:38:30 UTC</createdTime>
+<ownerDesignName>fitness</ownerDesignName>
+<engineerTo>
+<item key="48CCB2B6-E7E0-C95B-7C34-D067199E500B" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>2E5665C7-EC14-5B1F-5A28-352B2879D976</attributeRef>
+<attributeRef>02861100-1C85-BB5A-1EBC-19E52B3CA339</attributeRef>
+<attributeRef>7ACF151B-9A07-2DC0-E626-FC3A3EFD25C1</attributeRef>
+<attributeRef>C381AE3A-43CF-EA3B-2263-6B43D18982D7</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
