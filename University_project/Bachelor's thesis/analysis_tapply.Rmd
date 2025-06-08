@@ -1,0 +1,482 @@
+---
+title: "Praca_lic"
+author: "Justyna Zbiegień"
+date: "7.03.2020"
+output: html_document
+---
+```{r , include=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+library(broom)
+library(knitr)
+library(dplyr)
+library(kableExtra)
+library(magrittr)
+
+
+dane<-read.csv("..", header =TRUE, sep=";")
+colnames(dane)[1]<-c("y")
+```
+
+Dla zmiennych X2 oraz X13 nie da się policzyć normalności z testu Shapiro Wilka, ponieważ w grupach znajduje się mniej niż 3 obserwacje, dlatego z tabelach zostawiłam NA.
+
+```{r , include=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+
+srednie<-data.frame(matrix(ncol=1, nrow=6))
+srednie[]<-tapply(dane$y, dane$x2, mean)
+
+
+srednie2<-data.frame(matrix(ncol=1, nrow=6))
+srednie2[]<-tapply(dane$x1, dane$x2, mean)
+
+korelacje<-data.frame(matrix(ncol=1, nrow=6))
+korelacje[1,1]<-cor(dane[dane$x2==0,c("y","x1")])[1,2]
+korelacje[2,1]<-cor(dane[dane$x2==1,c("y","x1")])[1,2]
+korelacje[3,1]<-cor(dane[dane$x2==2,c("y","x1")])[1,2]
+korelacje[4,1]<-cor(dane[dane$x2==3,c("y","x1")])[1,2]
+korelacje[5,1]<-cor(dane[dane$x2==4,c("y","x1")])[1,2]
+korelacje[6,1]<-cor(dane[dane$x2==5,c("y","x1")])[1,2]
+
+
+nazwy<-data.frame(matrix(ncol=1, nrow=6))
+nazwy[]<-c("0","1","2","3","4","5")
+
+calosc<-data.frame(matrix(ncol=4, nrow=6))
+calosc[,2]<-srednie
+calosc[,3]<-srednie2
+calosc[,4]<-korelacje
+calosc[,1]<-nazwy
+
+calosc %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X2",  col.names = c("grupy dla X2", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach"), "markdown")
+
+
+#norm<-tapply(dane$y, dane$x2, shapiro.test)
+#calosc[4,1]<-norm$`1`$p.value
+#calosc[4,2]<-norm$`2`$p.value
+#calosc[4,3]<-norm$`3`$p.value
+#calosc[4,4]<-norm$`4`$p.value
+#calosc[4,5]<-norm$`5`$p.value
+#calosc[4,6]<-norm$`6`$p.value
+
+
+srednie3<-data.frame(matrix(ncol=1, nrow=2))
+srednie3[]<-tapply(dane$y, dane$x3, mean)
+
+srednie4<-data.frame(matrix(ncol=1, nrow=2))
+srednie4[]<-tapply(dane$x1, dane$x3, mean)
+
+korelacje2<-data.frame(matrix(ncol=1, nrow=2))
+korelacje2[1,1]<-cor(dane[dane$x3==0,c("y","x1")])[1,2]
+korelacje2[2,1]<-cor(dane[dane$x3==1,c("y","x1")])[1,2]
+
+nazwy2<-data.frame(matrix(ncol=1, nrow=2))
+nazwy2[]<-c("0","1")
+
+
+calosc2<-data.frame(matrix(ncol=5, nrow=2))
+calosc2[,1]<-nazwy2
+calosc2[,2]<-srednie3
+calosc2[,3]<-srednie4
+calosc2[,4]<-korelacje2
+
+norm2<-tapply(dane$y, dane$x3, shapiro.test)
+calosc2[1,5]<-norm2$`0`$p.value
+calosc2[2,5]<-norm2$`1`$p.value
+
+calosc2 %>%
+  mutate(
+    X5 = cell_spec(X5, color = ifelse(X5>0.05, "green","red"))
+  ) %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X3",  col.names = c("grupy dla X3", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach", "normalność (p-value)"), "markdown")
+
+
+srednie5<-data.frame(matrix(ncol=1, nrow=2))
+srednie5[]<-tapply(dane$y, dane$x4, mean)
+
+srednie6<-data.frame(matrix(ncol=1, nrow=2))
+srednie6[]<-tapply(dane$x1, dane$x4, mean)
+
+korelacje3<-data.frame(matrix(ncol=1, nrow=2))
+korelacje3[1,1]<-cor(dane[dane$x4==0,c("y","x1")])[1,2]
+korelacje3[2,1]<-cor(dane[dane$x4==1,c("y","x1")])[1,2]
+
+calosc3<-data.frame(matrix(ncol=5, nrow=2))
+calosc3[,2]<-srednie5
+calosc3[,3]<-srednie6
+calosc3[,4]<-korelacje3
+
+norm3<-tapply(dane$y, dane$x4, shapiro.test)
+calosc3[1,5]<-norm3$`0`$p.value
+calosc3[2,5]<-norm3$`1`$p.value
+
+nazwy3<-data.frame(matrix(ncol=1, nrow=2))
+nazwy3[]<-c("0","1")
+calosc3[,1]<-nazwy3
+
+calosc3 %>%
+  mutate(
+    X5 = cell_spec(X5, color = ifelse(X5>0.05, "green","red"))
+  ) %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X4",  col.names = c("grupy dla X4", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach", "normalność (p-value)"), "markdown")
+
+
+srednie7<-data.frame(matrix(ncol=1, nrow=3))
+srednie7[]<-tapply(dane$y, dane$x5, mean)
+
+srednie8<-data.frame(matrix(ncol=1, nrow=3))
+srednie8[]<-tapply(dane$x1, dane$x5, mean)
+
+
+korelacje4<-data.frame(matrix(ncol=1, nrow=3))
+korelacje4[1,1]<-cor(dane[dane$x5==1,c("y","x1")])[1,2]
+korelacje4[2,1]<-cor(dane[dane$x5==2,c("y","x1")])[1,2]
+korelacje4[3,1]<-cor(dane[dane$x5==3,c("y","x1")])[1,2]
+
+calosc4<-data.frame(matrix(ncol=5, nrow=3))
+calosc4[,2]<-srednie7
+calosc4[,3]<-srednie8
+calosc4[,4]<-korelacje4
+
+norm4<-tapply(dane$y, dane$x5, shapiro.test)
+calosc4[1,5]<-norm4$`1`$p.value
+calosc4[2,5]<-norm4$`2`$p.value
+calosc4[3,5]<-norm4$`3`$p.value
+
+nazwy4<-data.frame(matrix(ncol=1, nrow=3))
+nazwy4[]<-c("1", "2","3")
+calosc4[,1]<-nazwy4
+
+calosc4 %>%
+  mutate(
+    X5 = cell_spec(X5, color = ifelse(X5>0.05, "green","red"))
+  ) %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X5",  col.names = c("grupy dla X5", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach", "normalność (p-value)"), "markdown")
+
+
+
+srednie9<-data.frame(matrix(ncol=1, nrow=3))
+srednie9[]<-tapply(dane$y, dane$x6, mean)
+
+srednie10<-data.frame(matrix(ncol=1, nrow=3))
+srednie10[]<-tapply(dane$x1, dane$x6, mean)
+
+
+korelacje5<-data.frame(matrix(ncol=1, nrow=3))
+korelacje5[1,1]<-cor(dane[dane$x6==0,c("y","x1")])[1,2]
+korelacje5[2,1]<-cor(dane[dane$x6==1,c("y","x1")])[1,2]
+korelacje5[3,1]<-cor(dane[dane$x6==2,c("y","x1")])[1,2]
+
+calosc5<-data.frame(matrix(ncol=5, nrow=3))
+calosc5[,2]<-srednie9
+calosc5[,3]<-srednie10
+calosc5[,4]<-korelacje5
+norm5<-tapply(dane$y, dane$x6, shapiro.test)
+calosc5[1,5]<-norm5$`0`$p.value
+calosc5[2,5]<-norm5$`1`$p.value
+calosc5[3,5]<-norm5$`2`$p.value
+
+nazwy5<-data.frame(matrix(ncol=1, nrow=3))
+nazwy5[]<-c("0", "1","2")
+calosc5[,1]<-nazwy5
+
+calosc5 %>%
+  mutate(
+    X5 = cell_spec(X5, color = ifelse(X5>0.05, "green","red"))
+  ) %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X6",  col.names = c("grupy dla X6", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach", "normalność (p-value)"), "markdown")
+
+srednie11<-data.frame(matrix(ncol=1, nrow=2))
+srednie11[]<-tapply(dane$y, dane$x7, mean)
+
+srednie12<-data.frame(matrix(ncol=1, nrow=2))
+srednie12[]<-tapply(dane$x1, dane$x7, mean)
+
+korelacje6<-data.frame(matrix(ncol=1, nrow=2))
+korelacje6[1,1]<-cor(dane[dane$x7==0,c("y","x1")])[1,2]
+korelacje6[2,1]<-cor(dane[dane$x7==1,c("y","x1")])[1,2]
+
+calosc6<-data.frame(matrix(ncol=5, nrow=2))
+calosc6[,2]<-srednie11
+calosc6[,3]<-srednie12
+calosc6[,4]<-korelacje6
+norm6<-tapply(dane$y, dane$x7, shapiro.test)
+calosc6[1,5]<-norm6$`0`$p.value
+calosc6[2,5]<-norm6$`1`$p.value
+
+
+nazwy6<-data.frame(matrix(ncol=1, nrow=2))
+nazwy6[]<-c("0", "1")
+calosc6[,1]<-nazwy6
+
+calosc6 %>%
+  mutate(
+    X5 = cell_spec(X5, color = ifelse(X5>0.05, "green","red"))
+  ) %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X7",  col.names = c("grupy dla X7", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach", "normalność (p-value)"), "markdown")
+
+
+srednie13<-data.frame(matrix(ncol=1, nrow=2))
+srednie13[]<-tapply(dane$y, dane$x8, mean)
+
+srednie14<-data.frame(matrix(ncol=1, nrow=2))
+srednie14[]<-tapply(dane$x1, dane$x8, mean)
+
+korelacje7<-data.frame(matrix(ncol=1, nrow=2))
+korelacje7[1,1]<-cor(dane[dane$x8==0,c("y","x1")])[1,2]
+korelacje7[2,1]<-cor(dane[dane$x8==1,c("y","x1")])[1,2]
+
+calosc7<-data.frame(matrix(ncol=5, nrow=2))
+calosc7[,2]<-srednie13
+calosc7[,3]<-srednie14
+calosc7[,4]<-korelacje3
+norm7<-tapply(dane$y, dane$x8, shapiro.test)
+calosc7[1,5]<-norm7$`0`$p.value
+calosc7[2,5]<-norm7$`1`$p.value
+
+nazwy7<-data.frame(matrix(ncol=1, nrow=2))
+nazwy7[]<-c("0", "1")
+calosc7[,1]<-nazwy7
+
+calosc7 %>%
+  mutate(
+    X5 = cell_spec(X5, color = ifelse(X5>0.05, "green","red"))
+  ) %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X8",  col.names = c("grupy dla X8", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach", "normalność (p-value)"), "markdown")
+
+srednie15<-data.frame(matrix(ncol=1, nrow=3))
+srednie15[]<-tapply(dane$y, dane$x9, mean)
+
+srednie16<-data.frame(matrix(ncol=1, nrow=3))
+srednie16[]<-tapply(dane$x1, dane$x9, mean)
+
+korelacje8<-data.frame(matrix(ncol=1, nrow=3))
+korelacje8[1,1]<-cor(dane[dane$x9==0,c("y","x1")])[1,2]
+korelacje8[2,1]<-cor(dane[dane$x9==1,c("y","x1")])[1,2]
+korelacje8[3,1]<-cor(dane[dane$x9==2,c("y","x1")])[1,2]
+
+calosc8<-data.frame(matrix(ncol=5, nrow=3))
+calosc8[,2]<-srednie15
+calosc8[,3]<-srednie16
+calosc8[,4]<-korelacje8
+norm8<-tapply(dane$y, dane$x9, shapiro.test)
+calosc8[1,5]<-norm8$`0`$p.value
+calosc8[2,5]<-norm8$`1`$p.value
+calosc8[3,5]<-norm8$`2`$p.value
+
+nazwy8<-data.frame(matrix(ncol=1, nrow=3))
+nazwy8[]<-c("0", "1","2")
+calosc8[,1]<-nazwy8
+
+calosc8 %>%
+  mutate(
+    X5 = cell_spec(X5, color = ifelse(X5>0.05, "green","red"))
+  ) %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X9",  col.names = c("grupy dla X9", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach", "normalność (p-value)"), "markdown")
+
+
+srednie17<-data.frame(matrix(ncol=1, nrow=3))
+srednie17[]<-tapply(dane$y, dane$x10, mean)
+
+srednie18<-data.frame(matrix(ncol=1, nrow=3))
+srednie18[]<-tapply(dane$x1, dane$x10, mean)
+
+korelacje9<-data.frame(matrix(ncol=1, nrow=3))
+korelacje9[1,1]<-cor(dane[dane$x10==1,c("y","x1")])[1,2]
+korelacje9[2,1]<-cor(dane[dane$x10==2,c("y","x1")])[1,2]
+korelacje9[3,1]<-cor(dane[dane$x10==3,c("y","x1")])[1,2]
+
+calosc9<-data.frame(matrix(ncol=5, nrow=3))
+calosc9[,2]<-srednie17
+calosc9[,3]<-srednie18
+calosc9[,4]<-korelacje9
+norm9<-tapply(dane$y, dane$x10, shapiro.test)
+calosc9[1,5]<-norm9$`1`$p.value
+calosc9[2,5]<-norm9$`2`$p.value
+calosc9[3,5]<-norm9$`3`$p.value
+
+nazwy9<-data.frame(matrix(ncol=1, nrow=3))
+nazwy9[]<-c("1", "2","3")
+calosc9[,1]<-nazwy9
+
+calosc9 %>%
+  mutate(
+    X5 = cell_spec(X5, color = ifelse(X5>0.05, "green","red"))
+  ) %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X10",  col.names = c("grupy dla X10", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach", "normalność (p-value)"), "markdown")
+
+srednie19<-data.frame(matrix(ncol=1, nrow=2))
+srednie19[]<-tapply(dane$y, dane$x11, mean)
+
+srednie20<-data.frame(matrix(ncol=1, nrow=2))
+srednie20[]<-tapply(dane$x1, dane$x11, mean)
+
+
+korelacje10<-data.frame(matrix(ncol=1, nrow=2))
+korelacje10[1,1]<-cor(dane[dane$x11==0,c("y","x1")])[1,2]
+korelacje10[2,1]<-cor(dane[dane$x11==1,c("y","x1")])[1,2]
+
+calosc10<-data.frame(matrix(ncol=5, nrow=2))
+calosc10[,2]<-srednie19
+calosc10[,3]<-srednie20
+calosc10[,4]<-korelacje10
+norm10<-tapply(dane$y, dane$x11, shapiro.test)
+calosc10[1,5]<-norm10$`0`$p.value
+calosc10[2,5]<-norm10$`1`$p.value
+
+
+nazwy10<-data.frame(matrix(ncol=1, nrow=2))
+nazwy10[]<-c("0", "1")
+calosc10[,1]<-nazwy10
+
+calosc10 %>%
+  mutate(
+    X5 = cell_spec(X5, color = ifelse(X5>0.05, "green","red"))
+  ) %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X11",  col.names = c("grupy dla X11", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach", "normalność (p-value)"), "markdown")
+
+srednie21<-data.frame(matrix(ncol=2, nrow=1), row.names = c("średnia"))
+srednie21[]<-tapply(dane$y, dane$x12, mean)
+
+srednie22<-data.frame(matrix(ncol=1, nrow=2))
+srednie22[]<-tapply(dane$x1, dane$x12, mean)
+
+korelacje11<-data.frame(matrix(ncol=1, nrow=2))
+korelacje11[1,1]<-cor(dane[dane$x12==0,c("y","x1")])[1,2]
+korelacje11[2,1]<-cor(dane[dane$x12==1,c("y","x1")])[1,2]
+
+calosc11<-data.frame(matrix(ncol=5, nrow=2))
+calosc11[,2]<-srednie21
+calosc11[,3]<-srednie22
+calosc11[,4]<-korelacje11
+norm11<-tapply(dane$y, dane$x12, shapiro.test)
+calosc11[1,5]<-norm11$`0`$p.value
+calosc11[2,5]<-norm11$`1`$p.value
+
+nazwy11<-data.frame(matrix(ncol=1, nrow=2))
+nazwy11[]<-c("0", "1")
+calosc11[,1]<-nazwy11
+
+calosc11 %>%
+  mutate(
+    X5 = cell_spec(X5, color = ifelse(X5>0.05, "green","red"))
+  ) %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X12",  col.names = c("grupy dla X12", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach", "normalność (p-value)"), "markdown")
+
+srednie23<-data.frame(matrix(ncol=1, nrow=2))
+srednie23[]<-tapply(dane$y, dane$x13, mean)
+
+srednie24<-data.frame(matrix(ncol=1, nrow=2))
+srednie24[]<-tapply(dane$x1, dane$x13, mean)
+
+korelacje12<-data.frame(matrix(ncol=1, nrow=2))
+korelacje12[1,1]<-cor(dane[dane$x13==0,c("y","x1")])[1,2]
+korelacje12[2,1]<-cor(dane[dane$x13==1,c("y","x1")])[1,2]
+
+calosc12<-data.frame(matrix(ncol=4, nrow=2))
+calosc12[,2]<-srednie23
+calosc12[,3]<-srednie23
+calosc12[,4]<-korelacje12
+#norm12<-tapply(dane$y, dane$x13, shapiro.test)
+#calosc12[4,1]<-norm12$`0`$p.value
+#calosc12[4,2]<-norm12$`1`$p.value
+
+
+nazwy12<-data.frame(matrix(ncol=1, nrow=2))
+nazwy12[]<-c("0", "1")
+calosc12[,1]<-nazwy12
+
+calosc12 %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X13",  col.names = c("grupy dla X13", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach"), "markdown")
+
+
+srednie25<-data.frame(matrix(ncol=1, nrow=2))
+srednie25[]<-tapply(dane$y, dane$x14, mean)
+
+srednie26<-data.frame(matrix(ncol=1, nrow=2))
+srednie26[]<-tapply(dane$x1, dane$x14, mean)
+
+
+korelacje13<-data.frame(matrix(ncol=1, nrow=2))
+korelacje13[1,1]<-cor(dane[dane$x14==0,c("y","x1")])[1,2]
+korelacje13[2,1]<-cor(dane[dane$x14==1,c("y","x1")])[1,2]
+
+calosc13<-data.frame(matrix(ncol=5, nrow=2))
+calosc13[,2]<-srednie25
+calosc13[,3]<-srednie26
+calosc13[,4]<-korelacje13
+norm13<-tapply(dane$y, dane$x14, shapiro.test)
+calosc13[1,5]<-norm13$`0`$p.value
+calosc13[2,5]<-norm13$`1`$p.value
+
+
+nazwy13<-data.frame(matrix(ncol=1, nrow=2))
+nazwy13[]<-c("0", "1")
+calosc13[,1]<-nazwy13
+
+calosc13 %>%
+  mutate(
+    X5 = cell_spec(X5, color = ifelse(X5>0.05, "green","red"))
+  ) %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X14",  col.names = c("grupy dla X14", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach", "normalność (p-value)"), "markdown")
+
+
+srednie27<-data.frame(matrix(ncol=1, nrow=2))
+srednie27[]<-tapply(dane$y, dane$x15, mean)
+
+srednie28<-data.frame(matrix(ncol=1, nrow=2))
+srednie28[]<-tapply(dane$x1, dane$x15, mean)
+
+
+korelacje14<-data.frame(matrix(ncol=1, nrow=2))
+korelacje14[1,1]<-cor(dane[dane$x15==0,c("y","x1")])[1,2]
+korelacje14[2,1]<-cor(dane[dane$x15==1,c("y","x1")])[1,2]
+
+calosc14<-data.frame(matrix(ncol=5, nrow=2))
+calosc14[,2]<-srednie27
+calosc14[,3]<-srednie28
+calosc14[,4]<-korelacje14
+norm14<-tapply(dane$y, dane$x15, shapiro.test)
+calosc14[1,5]<-norm14$`0`$p.value
+calosc14[2,5]<-norm14$`1`$p.value
+
+
+nazwy14<-data.frame(matrix(ncol=1, nrow=2))
+nazwy14[]<-c("0", "1")
+calosc14[,1]<-nazwy14
+
+calosc14 %>%
+  mutate(
+    X5 = cell_spec(X5, color = ifelse(X5>0.05, "green","red"))
+  ) %>%
+  mutate(
+    X1 = cell_spec(X1, bold=TRUE, color="black"))%>%
+  kable(caption="X15",  col.names = c("grupy dla X15", "Średnie w grupach od Y","Średnie w grupach od X1", "korelacje w grupach", "normalność (p-value)"), "markdown")
+```
